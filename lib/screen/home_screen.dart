@@ -1,3 +1,4 @@
+import 'package:ccd_netflix_flutter/model/model_movie.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -8,6 +9,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<Movie> movies = [
+    Movie.fromMap({
+      'title': '로스쿨',
+      'keyword': '미스터리/범죄/법정',
+      'poster': 'law_school.jpg',
+      'like': false
+    })
+  ];
   @override
   Widget build(BuildContext context) {
     return TopBar();
