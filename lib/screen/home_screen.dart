@@ -1,5 +1,7 @@
 import 'package:ccd_netflix_flutter/model/model_movie.dart';
+import 'package:ccd_netflix_flutter/widget/box_slider.dart';
 import 'package:ccd_netflix_flutter/widget/carousel_slider.dart';
+import 'package:ccd_netflix_flutter/widget/circle_slider.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -34,6 +36,18 @@ class _HomeScreenState extends State<HomeScreen> {
       'keyword': '체스',
       'poster': 'queen\'s_gambit.jpg',
       'like': false
+    }),
+    Movie.fromMap({
+      'title': '로스쿨',
+      'keyword': '미스터리/범죄/법정',
+      'poster': 'law_school.jpg',
+      'like': true
+    }),
+    Movie.fromMap({
+      'title': '퀸스 갬빗',
+      'keyword': '체스',
+      'poster': 'queen\'s_gambit.jpg',
+      'like': false
     })
   ];
   @override
@@ -45,7 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
             CarouselImage(movies: movies),
             TopBar(),
           ],
-        )
+        ),
+        CircleSlider(movies: movies),
+        BoxSlider(movies: movies),
       ],
     );
   }
