@@ -1,4 +1,5 @@
 import 'package:ccd_netflix_flutter/model/model_movie.dart';
+import 'package:ccd_netflix_flutter/screen/detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class CircleSlider extends StatelessWidget {
@@ -17,7 +18,7 @@ class CircleSlider extends StatelessWidget {
             height: 120,
             child: ListView(
               scrollDirection: Axis.horizontal,
-              children: makeCircleImages(movies),
+              children: makeCircleImages(context, movies),
             ),
           ),
         ],
@@ -25,12 +26,19 @@ class CircleSlider extends StatelessWidget {
     );
   }
 
-  List<Widget> makeCircleImages(List<Movie> movies) {
+  List<Widget> makeCircleImages(BuildContext context, List<Movie> movies) {
     List<Widget> results = [];
 
     for (int i = 0, loopCnt = movies.length; i < loopCnt; i++) {
       results.add(InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailScreen(
+              movie: movies[i],
+            ),
+            fullscreenDialog: true,
+          ));
+        },
         child: Container(
           padding: const EdgeInsets.only(right: 10),
           child: Align(
