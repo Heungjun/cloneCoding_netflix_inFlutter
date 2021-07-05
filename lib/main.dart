@@ -1,6 +1,7 @@
 import 'package:ccd_netflix_flutter/screen/home_screen.dart';
 import 'package:ccd_netflix_flutter/screen/more_screen.dart';
 import 'package:ccd_netflix_flutter/widget/bottom_bar.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -30,7 +31,14 @@ class _MyAppState extends State<MyApp> {
           body: TabBarView(
             physics: NeverScrollableScrollPhysics(),
             children: [
-              HomeScreen(),
+              FutureBuilder(
+                future: Firebase.initializeApp(),
+                builder: (context, snapshot) => snapshot.hasError
+                    ? Text('Error')
+                    : snapshot.connectionState == ConnectionState.done
+                        ? HomeScreen()
+                        : LinearProgressIndicator(),
+              ),
               Container(
                 child: Center(
                   child: Text('Search'),

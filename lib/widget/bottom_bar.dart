@@ -46,7 +46,7 @@ class BottomBar extends StatelessWidget {
               child: Text(
                 '저장한 콘텐츠 목록',
                 style: TextStyle(
-                  fontSize: 9,
+                  fontSize: 8,
                 ),
               ),
             ),

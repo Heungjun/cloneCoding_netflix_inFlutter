@@ -44,7 +44,8 @@ class CircleSlider extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerLeft,
             child: CircleAvatar(
-              backgroundImage: AssetImage('Images/${movies[i].poster}'),
+              // backgroundImage: AssetImage('Images/${movies[i].poster}'),
+              backgroundImage: NetworkImage(movies[i].poster),
               radius: 48,
             ),
           ),

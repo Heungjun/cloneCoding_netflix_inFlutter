@@ -2,6 +2,7 @@ import 'package:ccd_netflix_flutter/model/model_movie.dart';
 import 'package:ccd_netflix_flutter/widget/box_slider.dart';
 import 'package:ccd_netflix_flutter/widget/carousel_slider.dart';
 import 'package:ccd_netflix_flutter/widget/circle_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,46 +13,26 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Movie> movies = [
-    Movie.fromMap({
-      'title': '로스쿨',
-      'keyword': '미스터리/범죄/법정',
-      'poster': 'law_school.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': '퀸스 갬빗',
-      'keyword': '체스',
-      'poster': 'queen\'s_gambit.jpg',
-      'like': true
-    }),
-    Movie.fromMap({
-      'title': '로스쿨',
-      'keyword': '미스터리/범죄/법정',
-      'poster': 'law_school.jpg',
-      'like': true
-    }),
-    Movie.fromMap({
-      'title': '퀸스 갬빗',
-      'keyword': '체스',
-      'poster': 'queen\'s_gambit.jpg',
-      'like': false
-    }),
-    Movie.fromMap({
-      'title': '로스쿨',
-      'keyword': '미스터리/범죄/법정',
-      'poster': 'law_school.jpg',
-      'like': true
-    }),
-    Movie.fromMap({
-      'title': '퀸스 갬빗',
-      'keyword': '체스',
-      'poster': 'queen\'s_gambit.jpg',
-      'like': false
-    })
-  ];
+  FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
+  late Stream<QuerySnapshot> streamData;
+
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
+    streamData = firebaseFirestore.collection('movie').snapshots();
+  }
+
+  Widget _fetchData(BuildContext context) => StreamBuilder<QuerySnapshot>(
+        stream: streamData,
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) return LinearProgressIndicator();
+          return _buildBody(context, snapshot.data!.docs);
+        },
+      );
+
+  Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
+    List<Movie> movies = snapshot.map((e) => Movie.fromSnapShot(e)).toList();
+
     return ListView(
       children: [
         Stack(
@@ -64,6 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
         BoxSlider(movies: movies),
       ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return _fetchData(context);
   }
 }
 
