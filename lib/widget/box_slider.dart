@@ -43,7 +43,7 @@ class BoxSlider extends StatelessWidget {
           padding: const EdgeInsets.only(right: 10),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: Image.asset('images/${movies[i].poster}'),
+            child: Image.asset('Images/${movies[i].poster}'),
           ),
         ),
       ));

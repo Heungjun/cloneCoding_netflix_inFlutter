@@ -32,7 +32,7 @@ class _DetailScreenState extends State<DetailScreen> {
                     width: double.maxFinite,
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                      image: AssetImage('images/${widget.movie.poster}'),
+                      image: AssetImage('Images/${widget.movie.poster}'),
                       fit: BoxFit.cover,
                     )),
                     child: ClipRRect(
@@ -48,7 +48,7 @@ class _DetailScreenState extends State<DetailScreen> {
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 45, 0, 10),
                                   child: Image.asset(
-                                    'images/${widget.movie.poster}',
+                                    'Images/${widget.movie.poster}',
                                   ),
                                   height: 300,
                                 ),
