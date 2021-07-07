@@ -1,4 +1,5 @@
 import 'package:ccd_netflix_flutter/screen/home_screen.dart';
+import 'package:ccd_netflix_flutter/screen/like_screen.dart';
 import 'package:ccd_netflix_flutter/screen/more_screen.dart';
 import 'package:ccd_netflix_flutter/screen/search_screen.dart';
 import 'package:ccd_netflix_flutter/widget/bottom_bar.dart';
@@ -41,11 +42,7 @@ class _MyAppState extends State<MyApp> {
                         : LinearProgressIndicator(),
               ),
               SearchScreen(),
-              Container(
-                child: Center(
-                  child: Text('Save'),
-                ),
-              ),
+              LikeScreen(),
               MoreScreen(),
             ],
           ),
