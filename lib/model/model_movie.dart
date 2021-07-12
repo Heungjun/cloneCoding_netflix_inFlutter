@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Movie {
-  final String title;
-  final String keyword;
-  final String poster;
-  final bool like;
-  final DocumentReference reference;
+  String title;
+  String keyword;
+  String poster;
+  bool like;
+  DocumentReference reference;
 
   Movie.fromMap(Map<String, dynamic> map, {required this.reference})
       : title = map['title'],

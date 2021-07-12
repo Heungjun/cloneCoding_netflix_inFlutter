@@ -5,6 +5,7 @@ import 'package:ccd_netflix_flutter/screen/search_screen.dart';
 import 'package:ccd_netflix_flutter/widget/bottom_bar.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'Netflix',
       theme: ThemeData(
         brightness: Brightness.dark,
