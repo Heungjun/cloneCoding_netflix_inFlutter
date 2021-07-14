@@ -1,7 +1,9 @@
+import 'package:ccd_netflix_flutter/Controller/movie_controller.dart';
 import 'package:ccd_netflix_flutter/model/model_movie.dart';
 import 'package:ccd_netflix_flutter/screen/detail_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -56,10 +58,11 @@ class _SearchScreenState extends State<SearchScreen> {
     return InkWell(
       child: Image.network(movie.poster),
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
+        MovieController.to.changeMovie(movie);
+        Get.to(
+          DetailScreen(),
           fullscreenDialog: true,
-          builder: (context) => DetailScreen(movie: movie),
-        ));
+        );
       },
     );
   }

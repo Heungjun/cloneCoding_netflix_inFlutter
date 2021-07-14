@@ -1,4 +1,4 @@
-import 'package:ccd_netflix_flutter/Controller/home_controller.dart';
+import 'package:ccd_netflix_flutter/Controller/movie_controller.dart';
 import 'package:ccd_netflix_flutter/model/model_movie.dart';
 import 'package:ccd_netflix_flutter/widget/box_slider.dart';
 import 'package:ccd_netflix_flutter/widget/carousel_slider.dart';
@@ -24,21 +24,19 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
     List<Movie> movies = snapshot.map((e) => Movie.fromSnapShot(e)).toList();
-    final HomeController controller = Get.put(HomeController(movies.obs));
+    Get.put(MovieController(movies.first.obs));
 
-    return Obx(
-      () => ListView(
-        children: [
-          Stack(
-            children: [
-              CarouselImage(controller),
-              TopBar(),
-            ],
-          ),
-          CircleSlider(movies: controller.movies.value),
-          BoxSlider(movies: controller.movies.value),
-        ],
-      ),
+    return ListView(
+      children: [
+        Stack(
+          children: [
+            CarouselImage(movies: movies),
+            TopBar(),
+          ],
+        ),
+        CircleSlider(movies: movies),
+        BoxSlider(movies: movies),
+      ],
     );
   }
 
@@ -47,54 +45,6 @@ class HomeScreen extends StatelessWidget {
     return _fetchData(context);
   }
 }
-
-// class HomeScreen extends StatefulWidget {
-//   const HomeScreen({Key? key}) : super(key: key);
-//
-//   @override
-//   _HomeScreenState createState() => _HomeScreenState();
-// }
-//
-// class _HomeScreenState extends State<HomeScreen> {
-//   FirebaseFirestore firebaseFirestore = FirebaseFirestore.instance;
-//   late Stream<QuerySnapshot> streamData;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     streamData = firebaseFirestore.collection('movie').snapshots();
-//   }
-//
-//   Widget _fetchData(BuildContext context) => StreamBuilder<QuerySnapshot>(
-//         stream: streamData,
-//         builder: (context, snapshot) {
-//           if (!snapshot.hasData) return LinearProgressIndicator();
-//           return _buildBody(context, snapshot.data!.docs);
-//         },
-//       );
-//
-//   Widget _buildBody(BuildContext context, List<DocumentSnapshot> snapshot) {
-//     List<Movie> movies = snapshot.map((e) => Movie.fromSnapShot(e)).toList();
-//
-//     return ListView(
-//       children: [
-//         Stack(
-//           children: [
-//             CarouselImage(movies: movies),
-//             TopBar(),
-//           ],
-//         ),
-//         CircleSlider(movies: movies),
-//         BoxSlider(movies: movies),
-//       ],
-//     );
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return _fetchData(context);
-//   }
-// }
 
 class TopBar extends StatelessWidget {
   const TopBar({Key? key}) : super(key: key);

@@ -1,6 +1,8 @@
+import 'package:ccd_netflix_flutter/Controller/movie_controller.dart';
 import 'package:ccd_netflix_flutter/model/model_movie.dart';
 import 'package:ccd_netflix_flutter/screen/detail_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CircleSlider extends StatelessWidget {
   const CircleSlider({Key? key, required this.movies}) : super(key: key);
@@ -32,12 +34,11 @@ class CircleSlider extends StatelessWidget {
     for (int i = 0, loopCnt = movies.length; i < loopCnt; i++) {
       results.add(InkWell(
         onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DetailScreen(
-              movie: movies[i],
-            ),
+          MovieController.to.changeMovie(movies[i]);
+          Get.to(
+            DetailScreen(),
             fullscreenDialog: true,
-          ));
+          );
         },
         child: Container(
           padding: const EdgeInsets.only(right: 10),

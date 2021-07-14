@@ -1,7 +1,9 @@
+import 'package:ccd_netflix_flutter/Controller/movie_controller.dart';
 import 'package:ccd_netflix_flutter/model/model_movie.dart';
 import 'package:ccd_netflix_flutter/screen/detail_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LikeScreen extends StatefulWidget {
   const LikeScreen({Key? key}) : super(key: key);
@@ -39,12 +41,11 @@ class _LikeScreenState extends State<LikeScreen> {
     return InkWell(
       child: Image.network(movie.poster),
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return DetailScreen(movie: movie);
-          },
+        MovieController.to.changeMovie(movie);
+        Get.to(
+          DetailScreen(),
           fullscreenDialog: true,
-        ));
+        );
       },
     );
   }
